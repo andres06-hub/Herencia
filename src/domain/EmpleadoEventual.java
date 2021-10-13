@@ -21,4 +21,6 @@ public class EmpleadoEventual extends Empleado{
     public void setFechaTerminoContrato(String fechaTerminoContrato){
         this.fechaTerminoContrato = fechaTerminoContrato;
     }
+
+    
 }

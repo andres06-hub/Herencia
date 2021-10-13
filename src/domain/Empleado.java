@@ -6,4 +6,6 @@ public class Empleado extends Persona{
     private double numHorasExtras;
     private String fechaIngreso;
     private String areaCargo;
+
+    
 }
