@@ -17,7 +17,7 @@ public class Empleado extends Persona{
     
     public void setNumHorasExtras(double numHorasExtras){this.numHorasExtras = numHorasExtras;}
  
-    // 3)
+    // 3)   
     public String getFechaIngreso(){return this.fechaIngreso;}
 
     public void setFechaIngreso(String fechaIngreso){this.fechaIngreso = fechaIngreso;}
@@ -26,4 +26,6 @@ public class Empleado extends Persona{
     public String getAreaCargo(){return this.areaCargo;}
 
     public void setAreaCargo(String areaCargo){this.areaCargo = areaCargo;}
+
+    
 }

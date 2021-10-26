@@ -5,6 +5,14 @@ public class Medico extends EmpleadoPlantilla{
     private String especialidad;
     private String numConsultorio;
 
+    // Se crea un constructor explicito
+    public void Medico(String especialidad, String numConsultorio){
+
+        this.especialidad = especialidad;
+        this.numConsultorio = numConsultorio;
+        
+    }
+
 
 
     // Creamos los metodos de acceso
