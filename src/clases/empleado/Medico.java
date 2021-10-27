@@ -1,4 +1,4 @@
-package domain;
+package clases.empleado;
 
 public class Medico extends EmpleadoPlantilla{
     
@@ -6,12 +6,11 @@ public class Medico extends EmpleadoPlantilla{
     private String numConsultorio;
 
     // Se crea un constructor explicito
-    public void Medico(String especialidad, String numConsultorio){
-
-        this.especialidad = especialidad;
-        this.numConsultorio = numConsultorio;
+    // public Medico(String especialidad, String numConsultorio){
         
-    }
+    //     this.especialidad = especialidad;
+    //     this.numConsultorio = numConsultorio;
+    // }
 
 
 
