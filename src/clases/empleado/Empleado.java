@@ -31,7 +31,20 @@ public class Empleado extends Persona{
         super.registrarDatos();
 
         this.codigoEmpleado = JOptionPane.showInputDialog("Ingrese el codigo del empleado");
-        this.numHorasExtras = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el numero de horas extras"));
+        
+        boolean validacion = true;
+        // Hacemos un ciclo por si el dato no se cumple
+        do {
+            // Tratamos de hacer esto, si el dato no es el que se pide ira al catch
+            try {
+                validacion = false;
+                this.numHorasExtras = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el numero de horas extras"));
+            } catch (NumberFormatException e) {
+                System.out.println("### Dato incorrecto, ingrese Datos de tipo numerico ###");
+                validacion = true;
+            }
+        } while (validacion);
+        
         this.fechaIngreso = JOptionPane.showInputDialog("Ingrese la fecha de ingreso ( DD/MM/AA )");
         this.area = JOptionPane.showInputDialog("Ingrese el area");
         this.cargo = JOptionPane.showInputDialog("Ingrese el cargo");

@@ -20,12 +20,25 @@ public class Paciente  extends Persona{
          * para continuar llanando los datos del paciente junto con los heredados
          */
 
-
         // llenamos los datos especificos del paciente 
         super.registrarDatos();
-
+        // Se crea el ArrayList<>
         this.listaMedicamentosAlergico  = new ArrayList<>();
-        this.numHistoriaClinica = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de la historia clinica"));
+        // Se crea una variable por referencia para poder validar en el doWhile
+        boolean validacion = true;
+        // Se hace un doWhile para poder repetir el ciclo cuando no se cumpla
+        // Cuando los datos sean incorrectos
+        do {
+            // 
+            try {
+                this.numHistoriaClinica = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de la historia clinica"));
+                validacion = false;
+            } catch (NumberFormatException e) {
+                System.out.println("XXX Error: dato no correcto XXX");
+                validacion = true;
+            }
+        } while (validacion);
+        
         // Se asigna el metodo  charAt(indice)
         // Este lo que hace es obtenerme el caracter en la indice '0'
         // EJEMPLO: char x = 'hola'; --> obtiene 'h'
@@ -89,7 +102,12 @@ public class Paciente  extends Persona{
     } 
 
     public void setNumHistoriaClinica(int numHistoriaClinica){
-        this.numHistoriaClinica = numHistoriaClinica;
+        // hacemos una excepcion 
+        try {
+            this.numHistoriaClinica = numHistoriaClinica;
+        } catch (NumberFormatException e) {
+            
+        }
     }
 
     public char getGenero(){

@@ -15,7 +15,7 @@ public class Persona {
     public void imprimirDatosPersona(String datos){
 
         // StringBuffer es un objeto por lo tanto toca instanciarlo (Crearlo)
-        StringBuffer sb = new StringBuffer();
+        // StringBuffer sb = new StringBuffer();
 
         datos+= "Nombre: "+ this.nombre+"\n";
         datos+= "Apellidos: "+this.apellido+"\n";
@@ -29,7 +29,7 @@ public class Persona {
 
     // Registrar los datos 
     public void registrarDatos(){
-        this.documento = JOptionPane.showInputDialog(null, "Ingrese el numero de 'documento'");
+        // this.documento = JOptionPane.showInputDialog(null, "Ingrese el numero de 'documento'");
         this.nombre = JOptionPane.showInputDialog(null, "Ingrese el 'nombre'");    
         this.apellido = JOptionPane.showInputDialog(null, "Ingrese el 'apellido'");
         this.fechaNacimiento = JOptionPane.showInputDialog(null, "Ingrese la fecha de nacimiento (DD/MM/AA)");

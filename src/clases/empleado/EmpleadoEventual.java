@@ -14,8 +14,19 @@ public class EmpleadoEventual extends Empleado{
 
         // Heredamos de la clse superior
         super.registrarDatos();
+        boolean validacion = true;
+        // se repite mientras el dato sea incorrecto
+        do {          
+            try {
+                // Se trata de pedir el dato de tipo double
+                this.honorariosPorHora = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el salario Mensual"));
+                validacion = false;
+            } catch (Exception e) {
+                System.out.println("XXX Error: Dato no valido\nIngrese un dato de tipo number XXX");
+                validacion = true;
+            }
+        } while (validacion);
 
-        this.honorariosPorHora = Double.parseDouble(JOptionPane.showInputDialog("Ingrese el salario Mensual"));
         this.fechaTerminoContrato = JOptionPane.showInputDialog("Ingresa la fecha de nacimiento ( DD/MM/AA )");
 
     }

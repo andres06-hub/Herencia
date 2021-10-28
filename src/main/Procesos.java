@@ -1,15 +1,15 @@
 package main;
 
 import javax.swing.JOptionPane;
-
 import clases.ModeloDatos;
 import clases.Paciente;
 import clases.empleado.EmpleadoEventual;
 import clases.empleado.EmpleadoPlantilla;
 import clases.empleado.Medico;
 import clases.*;
+// import clases.ModeloDatos;
 
-public class Procesos {
+public class Procesos{
 
     // Iniciamos el contructor para instanciar la clase
     ModeloDatos miModeloDatos;
@@ -31,7 +31,7 @@ public class Procesos {
         menu+="1. Registrar pacientes\n";
         menu+="2. Registrar Empleado\n";
         menu+="3. Registrar Cita Medica\n";
-        menu+="4. Imprimir Información";
+        menu+="4. Imprimir Información\n";
         menu+="5. SALIR\n\n";
         menu+="Ingrese una opción\n";
 
@@ -65,7 +65,7 @@ public class Procesos {
                     break;
                 case 5:
                 // Sera la opcion 5 en el menu
-
+                // SALIR
                     break;
                 default:
                     break;
@@ -85,11 +85,22 @@ public class Procesos {
         // Se instancia la clase Paciente
         // Y creamos un objeto de tipo Paciente
         Paciente miPaciente = new Paciente();
-        // Registramos el pasiente llamando el metodo registrar y asi llenar los datos
-        miPaciente.registrarDatos();
-
-        // Utilizamos el objeto creado de ModeloDatos, en la linea 17 se creo
-        miModeloDatos.registrarPersona(miPaciente);
+        
+        // Se pide primero el documento para verificar si el Paciente ya esta registrado
+        String documento = JOptionPane.showInputDialog("Ingrese el documento");
+        if(miModeloDatos.existePaciente(documento)) {
+            // Se imprime si el usuario esta registrado : true
+            System.out.println("### YA existe el 'Paciente' ###");
+            String mensaje = "### YA existe el 'Paciente' ###\nCon el Documento : "+documento;
+            JOptionPane.showMessageDialog(null, mensaje);
+        } else {
+            // Si no esta registrado 
+            // Registramos el pasiente llamando el metodo registrar y asi llenar los datos
+            miPaciente.setDocumento(documento);
+            miPaciente.registrarDatos();
+            // Utilizamos el objeto creado de ModeloDatos, en la linea 17 se creo
+            miModeloDatos.registrarPersona(miPaciente);
+        }
 
     }
     /**
@@ -112,16 +123,35 @@ public class Procesos {
         int tipoEmpleado = Integer.parseInt(JOptionPane.showInputDialog(menuTipoEmpleado));
 
         switch (tipoEmpleado) {
+            // ###################################
+            // EMPLEADO EVENTUAL
             case 1://Registro de empleado Eventual 
                 // Se Instancia la clase de tipo EmpleadoEvenetual 
                 // Y se crea un objeto
                 EmpleadoEventual miEmpleadoEventual = new EmpleadoEventual();
-                // Registramos los datos para el objeto creado
-                miEmpleadoEventual.registrarDatos();
-                // Guardamos el objeto creado(miEmpleadoEventula)
-                // En una estructura de datos
-                miModeloDatos.registrarPersona(miEmpleadoEventual);
+                // Pedimos el documento del empleado
+                String documentoEmpleEvent = JOptionPane.showInputDialog("Ingrese el documento");
+
+                // Se verifica si el Empleado Eventual ya existe
+                if(miModeloDatos.existeEmpleadoEventula(documentoEmpleEvent)){
+                    // Se imprime el mensaje en la terminal
+                    System.out.println("### El Empleado Eventual YA se encuentra registrado ###\nCon el documento : "+documentoEmpleEvent);
+                    String mensajeEmpleEvent = "### El Empleado Eventual YA se encuentra registrado ###\nCon el documento : "+documentoEmpleEvent;
+                    // Se imprime el mensaje por ventana emergente
+                    JOptionPane.showMessageDialog(null, mensajeEmpleEvent);
+                }else{
+                    // Se registran los datos del Empleado
+                    // Se asigna el documento
+                    miEmpleadoEventual.setDocumento(documentoEmpleEvent);
+                    // Registramos los datos para el objeto creado
+                    miEmpleadoEventual.registrarDatos();
+                    // Guardamos el objeto creado(miEmpleadoEventula)
+                    // En una estructura de datos
+                    miModeloDatos.registrarPersona(miEmpleadoEventual);
+                }
                 break;
+            //######################################## 
+            // EMPLEADO PLANILLA
             case 2:
                 //Preguntamos al usuario si es un tipo de empleadoPlamilla
                 String datoObtenidoResp = JOptionPane.showInputDialog("Ingrese 'SI', si es un médico, de lo contrario es otro tipo de empleado");
@@ -129,18 +159,39 @@ public class Procesos {
                     // Registro Medico
                     // Creamos el objeto de tipo Medico()
                     Medico miMedico = new Medico();
-                    // Registramos los datos del medico
-                    // llamando la funcion registrar datos
-                    miMedico.registrarDatos();
-                    // Guardamos esta informacion de registro en una estructura de datos (HashMap)
-                    miModeloDatos.registrarPersona(miMedico);
+                    // 
+                    String documentoEmplePlant = JOptionPane.showInputDialog("Ingrese el documento");
+                    if (miModeloDatos.existeMedico(documentoEmplePlant)) {
+                        System.out.println("### El medico YA esta registrado ###");
+                        String mensaje = "# El medico YA esta registrado #\nEl documento es: "+documentoEmplePlant;
+                        JOptionPane.showMessageDialog(null, mensaje);
+                    }else{
+                        // Registramos los datos del medico
+                        // llamando la funcion registrar datos
+                        // Se define el documento, se declara
+                        miMedico.setDocumento(documentoEmplePlant);
+                        miMedico.registrarDatos();
+                        // Guardamos esta informacion de registro en una estructura de datos (HashMap)
+                        miModeloDatos.registrarPersona(miMedico);
+                    }
+
                 }else{
                     // Si la repsuesta es 'NO' registramos al ususario como EmpleadoPlantilla 
                     EmpleadoPlantilla miEmpPlantilla = new EmpleadoPlantilla();
-                    // Registramos los datos del empleado plantilla
-                    miEmpPlantilla.registrarDatos();
-                    // Guardamos los datos en una estructura de datos
-                    miModeloDatos.registrarPersona(miEmpPlantilla);
+
+                    String documento = JOptionPane.showInputDialog("Ingrese el documento");
+
+                    if (miModeloDatos.existeEmpeladoPlantilla(documento)){
+                        System.out.println("## El empleado en planilla ya exista ##");
+                        JOptionPane.showInputDialog(null, "## El empleado en planilla ya exista ##\nCon el documento: "+documento);
+                    }else{
+                        // Definimos el documento
+                        miEmpPlantilla.setDocumento(documento);
+                        // Registramos los datos del empleado plantilla
+                        miEmpPlantilla.registrarDatos();
+                        // Guardamos los datos en una estructura de datos
+                        miModeloDatos.registrarPersona(miEmpPlantilla);
+                    }
                 }
 
                 break;
@@ -196,7 +247,6 @@ public class Procesos {
     }
 
 
-
     /**
      * 4)Imprimir informacion
      */
@@ -243,7 +293,5 @@ public class Procesos {
             default:
                 break;
         }
-
-
     }
 }
